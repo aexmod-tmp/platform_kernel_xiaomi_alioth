@@ -7290,7 +7290,7 @@ static void smblib_enable_otg_check_wl(struct smb_charger *chg, int enable){
 irqreturn_t default_irq_handler(int irq, void *data)
 {
 	struct smb_irq_data *irq_data = data;
-	struct smb_charger *chg = irq_data->parent_data;
+	struct smb_charger *chg __maybe_unused = irq_data->parent_data;
 
 	smblib_dbg(chg, PR_INTERRUPT, "IRQ: %s\n", irq_data->name);
 	return IRQ_HANDLED;
