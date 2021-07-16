@@ -163,6 +163,33 @@
  */
 #define FTS_ESDCHECK_EN                         0
 
+/*
+ * Production test enable
+ * 1: enable, 0:disable(default)
+ */
+#define FTS_TEST_EN                             0
+
+/*
+ * Glove mode enable
+ * 1: enable, 0:disable(default)
+ */
+#define FTS_GLOVE_EN                            0
+/*
+ * cover enable
+ * 1: enable, 0:disable(default)
+ */
+#define FTS_COVER_EN                            0
+/*
+ * Charger enable
+ * 1: enable, 0:disable(default)
+ */
+#define FTS_CHARGER_EN                          1
+
+/*
+ * Nodes for tools, please keep enable
+ */
+#define FTS_SYSFS_NODE_EN                       1
+#define FTS_APK_NODE_EN                         1
 
 /*
  * Pinctrl enable
