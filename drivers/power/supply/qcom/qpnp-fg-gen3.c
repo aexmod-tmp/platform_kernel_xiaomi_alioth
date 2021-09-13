@@ -4426,7 +4426,7 @@ static int fg_adjust_timebase(struct fg_dev *fg)
 	if ((fg->wa_flags & PM660_TSMC_OSC_WA) && chip->die_temp_chan) {
 		rc = iio_read_channel_processed(chip->die_temp_chan, &die_temp);
 		if (rc < 0) {
-			pr_err("Error in reading die_temp, rc:%d\n", rc);
+			pr_debug("Error in reading die_temp, rc:%d\n", rc);
 			return rc;
 		}
 
@@ -4564,7 +4564,7 @@ static irqreturn_t fg_delta_batt_temp_irq_handler(int irq, void *data)
 	if (fg->last_batt_temp != batt_temp) {
 		rc = fg_adjust_timebase(fg);
 		if (rc < 0)
-			pr_err("Error in adjusting timebase, rc=%d\n", rc);
+			pr_debug("Error in adjusting timebase, rc=%d\n", rc);
 
 		rc = fg_adjust_recharge_voltage(fg);
 		if (rc < 0)
@@ -4642,7 +4642,7 @@ static irqreturn_t fg_delta_msoc_irq_handler(int irq, void *data)
 
 	rc = fg_adjust_timebase(fg);
 	if (rc < 0)
-		pr_err("Error in adjusting timebase, rc=%d\n", rc);
+		pr_debug("Error in adjusting timebase, rc=%d\n", rc);
 
 	if (batt_psy_initialized(fg))
 		power_supply_changed(fg->batt_psy);

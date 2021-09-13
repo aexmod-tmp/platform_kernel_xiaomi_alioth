@@ -1972,8 +1972,6 @@ int smblib_get_prop_batt_health(struct smb_charger *chg,
 			rc);
 		return rc;
 	}
-	smblib_dbg(chg, PR_REGISTER, "BATTERY_CHARGER_STATUS_2 = 0x%02x\n",
-		   stat);
 
 	if (stat & CHARGER_ERROR_STATUS_BAT_OV_BIT) {
 		rc = smblib_get_prop_from_bms(chg,
@@ -3441,14 +3439,23 @@ int smblib_get_prop_slave_current_now(struct smb_charger *chg,
  * INTERRUPT HANDLERS *
  **********************/
 
+#ifdef DEBUG
 irqreturn_t smblib_handle_debug(int irq, void *data)
 {
+#ifdef CONFIG_DEBUG_SMB_LIB
 	struct smb_irq_data *irq_data = data;
 	struct smb_charger *chg = irq_data->parent_data;
 
 	smblib_dbg(chg, PR_INTERRUPT, "IRQ: %s\n", irq_data->name);
+#endif
 	return IRQ_HANDLED;
 }
+#else
+inline irqreturn_t smblib_handle_debug(__attribute__((unused)) int irq, __attribute__((unused)) void *data)
+{
+	return IRQ_HANDLED;
+}
+#endif
 
 irqreturn_t smblib_handle_otg_overcurrent(int irq, void *data)
 {
